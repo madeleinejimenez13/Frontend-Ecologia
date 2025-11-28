@@ -1,4 +1,4 @@
-<!-- templates/dispositivos_list.html - PARTE 1 -->
+<!-- templates/dispositivos_list.html -->
 {% extends "base.html" %}
 {% block title %}Mis Dispositivos - SimuVidaTech{% endblock %}
 {% block content %}
@@ -198,3 +198,226 @@
     align-items: center;
     gap: 5px;
   }
+  /* Decisiones */
+  .decisiones-section {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #e5e7eb;
+  }
+  
+  .decisiones-title {
+    font-weight: 600;
+    color: #059669;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+  
+  .decisiones-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .decision-item {
+    padding: 8px 12px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    color: #374151;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .decision-impact {
+    font-weight: 600;
+    color: #059669;
+  }
+  
+  /* Estado Vacío */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  }
+  
+  .empty-icon {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+  }
+  
+  .empty-title {
+    font-size: 1.5rem;
+    color: #374151;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .empty-text {
+    color: #6b7280;
+    margin-bottom: 25px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header-section {
+      padding: 20px;
+    }
+    
+    .header-title h2 {
+      font-size: 1.5rem;
+    }
+    
+    .device-card {
+      padding: 20px;
+    }
+    
+    .device-header {
+      flex-direction: column;
+    }
+    
+    .impact-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .etapa-impacts {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+</style>
+
+<!-- Header de la página -->
+<div class="header-section">
+  <div class="header-title">
+    <span class="header-icon">🌿</span>
+    <h2>Mis Dispositivos Analizados</h2>
+  </div>
+  <div class="header-actions">
+    <a href="{{ url_for('index') }}" class="btn btn-primary">➕ Nuevo Dispositivo</a>
+  </div>
+</div>
+
+<!-- Verificar si hay dispositivos -->
+{% if dispositivos %}
+  <!-- Loop por cada dispositivo -->
+  {% for d in dispositivos %}
+    <div class="device-card {{ d.tipo }}">
+      <!-- Header del dispositivo -->
+      <div class="device-header">
+        <div class="device-info">
+          <h3>{{ d.nombre }}</h3>
+          <div class="device-meta">
+            <span class="meta-item">📱 Tipo: <strong>{{ d.tipo | title }}</strong></span>
+            <span class="meta-item">🔄 Etapas: <strong>{{ d.numero_etapas }}</strong></span>
+          </div>
+        </div>
+        <div class="device-actions">
+          <form method="post" action="{{ url_for('dispositivos.eliminar_dispositivo', dispositivo_id=d.id) }}" style="display: inline;">
+            <button type="submit" onclick="return confirm('¿Estás seguro de eliminar este dispositivo?')" class="btn btn-danger btn-icon" title="Eliminar">
+              🗑️
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Descripción -->
+      {% if d.descripcion %}
+        <p style="color: #6b7280; margin-bottom: 20px; line-height: 1.6;">{{ d.descripcion }}</p>
+      {% endif %}
+
+      <!-- Calcular impacto total -->
+      {% set total_co2 = d.etapas | sum(attribute='impacto.CO2') %}
+      {% set total_agua = d.etapas | sum(attribute='impacto.agua') %}
+      {% set total_residuos = d.etapas | sum(attribute='impacto.residuos') %}
+      
+      <!-- Resumen de Impacto Total -->
+      <div class="impact-summary">
+        <div class="impact-title">📊 Impacto Ambiental Total del Ciclo de Vida</div>
+        <div class="impact-grid">
+          <div class="impact-item">
+            <div class="impact-icon">🌍</div>
+            <span class="impact-value">{{ "%.1f"|format(total_co2) }}</span>
+            <span class="impact-label">kg CO₂</span>
+          </div>
+          <div class="impact-item">
+            <div class="impact-icon">💧</div>
+            <span class="impact-value">{{ "%.1f"|format(total_agua) }}</span>
+            <span class="impact-label">Litros Agua</span>
+          </div>
+          <div class="impact-item">
+            <div class="impact-icon">🗑️</div>
+            <span class="impact-value">{{ "%.1f"|format(total_residuos) }}</span>
+            <span class="impact-label">kg Residuos</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de Etapas del Ciclo de Vida -->
+      <div class="etapas-section">
+        <div class="etapas-title">
+          <span>🔄</span>
+          Etapas del Ciclo de Vida
+        </div>
+        
+        <!-- Loop por cada etapa -->
+        {% for e in d.etapas %}
+          <div class="etapa-card">
+            <div class="etapa-header">{{ loop.index }}. {{ e.nombre }}</div>
+            
+            <!-- Impactos de la etapa -->
+            <div class="etapa-impacts">
+              <span class="etapa-impact-item">
+                🌍 <strong>{{ "%.2f"|format(e.impacto.CO2) }} kg CO₂</strong>
+              </span>
+              <span class="etapa-impact-item">
+                💧 <strong>{{ "%.1f"|format(e.impacto.agua) }} L Agua</strong>
+              </span>
+              <span class="etapa-impact-item">
+                🗑️ <strong>{{ "%.1f"|format(e.impacto.residuos) }} kg Residuos</strong>
+              </span>
+            </div>
+
+            <!-- Descripción de la etapa -->
+            {% if e.descripcion %}
+              <p style="font-size: 0.85rem; color: #6b7280; margin: 8px 0;">{{ e.descripcion }}</p>
+            {% endif %}
+
+            <!-- Decisiones de mejora -->
+            {% if e.decisiones %}
+              <div class="decisiones-section">
+                <div class="decisiones-title">💡 Acciones de Mejora Disponibles</div>
+                <ul class="decisiones-list">
+                  {% for dec in e.decisiones %}
+                    <li class="decision-item">
+                      <span>{{ dec.nombre }}</span>
+                      <span class="decision-impact">
+                        {{ "%.2f"|format(dec.impacto.CO2) }} kg CO₂
+                      </span>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+
+<!-- Si no hay dispositivos, mostrar estado vacío -->
+{% else %}
+  <div class="empty-state">
+    <div class="empty-icon">📱</div>
+    <div class="empty-title">No hay dispositivos analizados</div>
+    <p class="empty-text">Comienza creando tu primer análisis de ciclo de vida</p>
+    <a href="{{ url_for('index') }}" class="btn btn-primary">Crear Mi Primer Dispositivo</a>
+  </div>
+{% endif %}
+
+{% endblock %}

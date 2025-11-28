@@ -1,0 +1,67 @@
+<!-- templates/etapas_form.html -->
+{% extends "base.html" %}
+{% block title %}{{ accion }} Etapa - {{ dispositivo.nombre }}{% endblock %}
+{% block content %}
+  <div class="card">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">
+      {{ accion }} Etapa - Dispositivo: <span class="text-blue-600">{{ dispositivo.nombre }}</span>
+    </h2>
+
+    <form method="post" class="space-y-6">
+      <!-- Nombre -->
+      <div>
+        <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre de la etapa</label>
+        {{ form.nombre(class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500") }}
+        {% if form.nombre.errors %}
+          <p class="mt-1 text-sm text-red-600">{{ form.nombre.errors[0] }}</p>
+        {% endif %}
+      </div>
+
+      <!-- CO2 -->
+      <div>
+        <label for="co2" class="block text-sm font-medium text-gray-700">CO₂ (kg)</label>
+        {{ form.co2(class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500", step=0.01) }}
+        {% if form.co2.errors %}
+          <p class="mt-1 text-sm text-red-600">{{ form.co2.errors[0] }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Agua -->
+      <div>
+        <label for="agua" class="block text-sm font-medium text-gray-700">Agua (L)</label>
+        {{ form.agua(class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500", step=0.1) }}
+        {% if form.agua.errors %}
+          <p class="mt-1 text-sm text-red-600">{{ form.agua.errors[0] }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Residuos -->
+      <div>
+        <label for="residuos" class="block text-sm font-medium text-gray-700">Residuos (kg)</label>
+        {{ form.residuos(class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500", step=0.01) }}
+        {% if form.residuos.errors %}
+          <p class="mt-1 text-sm text-red-600">{{ form.residuos.errors[0] }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Descripción -->
+      <div>
+        <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
+        {{ form.descripcion(class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500", rows=3) }}
+        {% if form.descripcion.errors %}
+          <p class="mt-1 text-sm text-red-600">{{ form.descripcion.errors[0] }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Acciones -->
+      <div class="flex space-x-3 pt-4">
+        <button type="submit" class="btn-success">
+          {{ accion }}
+        </button>
+        <a href="{{ url_for('dispositivos.list_dispositivos') }}" class="btn-secondary">
+          Volver
+        </a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

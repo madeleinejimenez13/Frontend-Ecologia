@@ -1,0 +1,262 @@
+<!-- templates/index.html - PARTE 1 -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SimuVidaTech - Simulador de Ciclo de Vida</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 0.6s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .header {
+      margin-bottom: 50px;
+    }
+    
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .logo-icon {
+      font-size: 4rem;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    h1 {
+      color: white;
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      letter-spacing: -1px;
+    }
+    
+    .subtitle {
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+    
+    .description {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.05rem;
+      max-width: 700px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
+    }
+    
+    .view-devices-btn {
+      display: inline-block;
+      background: white;
+      color: #667eea;
+      padding: 12px 30px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+      margin-bottom: 30px;
+    }
+    
+    .view-devices-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+      background: #f8f9ff;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+    
+    .device-card {
+      background: white;
+      padding: 35px 25px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: #1f2937;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .device-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    
+    .device-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .device-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+    
+    .device-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    
+    .device-card:hover .device-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .device-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 8px;
+    }
+    
+    .device-desc {
+      font-size: 0.9rem;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+    
+    .stats-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 12px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .description {
+        font-size: 0.95rem;
+      }
+      
+      .cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 15px;
+      }
+      
+      .device-card {
+        padding: 25px 15px;
+      }
+      
+      .device-icon {
+        font-size: 3rem;
+      }
+      
+      .device-name {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<!-- templates/index.html - PARTE 3 (FINAL) -->
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <span class="logo-icon">🌿</span>
+      </div>
+      <h1>SimuVidaTech</h1>
+      <p class="subtitle">Simulador del Ciclo de Vida de Dispositivos Tecnológicos</p>
+      <p class="description">
+        Analiza el impacto ambiental completo de dispositivos electrónicos desde la extracción de materias primas hasta su reciclaje
+      </p>
+      <a href="{{ url_for('dispositivos.list_dispositivos') }}" class="view-devices-btn">
+        📊 Ver Mis Dispositivos
+      </a>
+    </div>
+    
+    <div class="cards-grid">
+      <!-- Tarjeta Smartphone -->
+      <a href="{{ url_for('dispositivos.crear_dispositivo_automatico', tipo='telefono') }}" class="device-card">
+        <div class="device-icon">📱</div>
+        <div class="device-name">Smartphone</div>
+        <div class="device-desc">Dispositivo móvil inteligente</div>
+        <span class="stats-badge">5 Etapas de Análisis</span>
+      </a>
+      
+      <!-- Tarjeta Laptop -->
+      <a href="{{ url_for('dispositivos.crear_dispositivo_automatico', tipo='laptop') }}" class="device-card">
+        <div class="device-icon">💻</div>
+        <div class="device-name">Laptop</div>
+        <div class="device-desc">Computadora portátil</div>
+        <span class="stats-badge">5 Etapas de Análisis</span>
+      </a>
+      
+      <!-- Tarjeta Monitor -->
+      <a href="{{ url_for('dispositivos.crear_dispositivo_automatico', tipo='monitor') }}" class="device-card">
+        <div class="device-icon">🖥️</div>
+        <div class="device-name">Monitor</div>
+        <div class="device-desc">Pantalla de visualización</div>
+        <span class="stats-badge">5 Etapas de Análisis</span>
+      </a>
+      
+      <!-- Tarjeta Tablet -->
+      <a href="{{ url_for('dispositivos.crear_dispositivo_automatico', tipo='tablet') }}" class="device-card">
+        <div class="device-icon">📲</div>
+        <div class="device-name">Tablet</div>
+        <div class="device-desc">Dispositivo táctil versátil</div>
+        <span class="stats-badge">5 Etapas de Análisis</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

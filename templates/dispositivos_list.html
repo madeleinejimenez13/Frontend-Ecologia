@@ -1,0 +1,200 @@
+<!-- templates/dispositivos_list.html - PARTE 1 -->
+{% extends "base.html" %}
+{% block title %}Mis Dispositivos - SimuVidaTech{% endblock %}
+{% block content %}
+<style>
+  /* Sección Header */
+  .header-section {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .header-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .header-title h2 {
+    color: #1f2937;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  
+  .header-icon {
+    font-size: 2.5rem;
+  }
+  
+  .header-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  /* Cards de Dispositivos */
+  .device-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+    border-left: 5px solid transparent;
+  }
+  
+  .device-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+  }
+  
+  .device-card.telefono { border-left-color: #3b82f6; }
+  .device-card.laptop { border-left-color: #8b5cf6; }
+  .device-card.monitor { border-left-color: #10b981; }
+  .device-card.tablet { border-left-color: #f59e0b; }
+  
+  .device-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    gap: 20px;
+  }
+  
+  .device-info h3 {
+    font-size: 1.6rem;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+  }
+  
+  .device-meta {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    color: #6b7280;
+  }
+  
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .device-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .btn-icon {
+    padding: 8px 12px;
+    font-size: 1.1rem;
+  }
+  /* Resumen de Impacto */
+  .impact-summary {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    border: 2px solid #bae6fd;
+  }
+  
+  .impact-title {
+    font-weight: 700;
+    color: #0c4a6e;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+  }
+  
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+  
+  .impact-item {
+    text-align: center;
+    padding: 12px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .impact-icon {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+  }
+  
+  .impact-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1f2937;
+    display: block;
+  }
+  
+  .impact-label {
+    font-size: 0.8rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Sección de Etapas */
+  .etapas-section {
+    margin-top: 25px;
+  }
+  
+  .etapas-title {
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .etapa-card {
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border-left: 4px solid #3b82f6;
+    transition: all 0.2s ease;
+  }
+  
+  .etapa-card:hover {
+    background: #f3f4f6;
+    transform: translateX(5px);
+  }
+  
+  .etapa-header {
+    font-weight: 700;
+    color: #1e40af;
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+  }
+  
+  .etapa-impacts {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    color: #4b5563;
+    margin-bottom: 12px;
+  }
+  
+  .etapa-impact-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }

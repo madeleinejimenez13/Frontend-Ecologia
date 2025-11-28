@@ -1,0 +1,199 @@
+{
+  "dispositivos": [
+    {
+      "id": 1,
+      "nombre": "Smartphone",
+      "tipo": "telefono",
+      "numero_etapas": 5,
+      "descripcion": "Dispositivo móvil inteligente con múltiples funciones",
+      "etapas": [
+        {
+          "id": 1,
+          "nombre": "Extracción de Materias Primas",
+          "impacto": {
+            "CO2": 8.5,
+            "agua": 150.0,
+            "residuos": 3.2
+          },
+          "descripcion": "Minería de metales raros, litio, cobalto y otros materiales",
+          "decisiones": [
+            {
+              "id": 1,
+              "nombre": "Usar materiales reciclados",
+              "impacto": {
+                "CO2": -0.8,
+                "agua": -15.0,
+                "residuos": -0.5
+              }
+            },
+            {
+              "id": 2,
+              "nombre": "Optimizar procesos productivos",
+              "impacto": {
+                "CO2": -1.2,
+                "agua": -25.0,
+                "residuos": -0.8
+              }
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "nombre": "Fabricación y Ensamblaje",
+          "impacto": {
+            "CO2": 12.3,
+            "agua": 220.0,
+            "residuos": 5.1
+          },
+          "descripcion": "Producción de componentes electrónicos y ensamblaje final",
+          "decisiones": [
+            {
+              "id": 1,
+              "nombre": "Usar materiales reciclados",
+              "impacto": {
+                "CO2": -0.8,
+                "agua": -15.0,
+                "residuos": -0.5
+              }
+            },
+            {
+              "id": 2,
+              "nombre": "Optimizar procesos productivos",
+              "impacto": {
+                "CO2": -1.2,
+                "agua": -25.0,
+                "residuos": -0.8
+              }
+            },
+            {
+              "id": 3,
+              "nombre": "Energía renovable",
+              "impacto": {
+                "CO2": -2.5,
+                "agua": -10.0,
+                "residuos": -0.3
+              }
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "nombre": "Distribución y Transporte",
+          "impacto": {
+            "CO2": 2.8,
+            "agua": 15.0,
+            "residuos": 0.8
+          },
+          "descripcion": "Transporte desde fábricas hasta puntos de venta",
+          "decisiones": [
+            {
+              "id": 1,
+              "nombre": "Usar materiales reciclados",
+              "impacto": {
+                "CO2": -0.8,
+                "agua": -15.0,
+                "residuos": -0.5
+              }
+            },
+            {
+              "id": 2,
+              "nombre": "Optimizar procesos productivos",
+              "impacto": {
+                "CO2": -1.2,
+                "agua": -25.0,
+                "residuos": -0.8
+              }
+            },
+            {
+              "id": 3,
+              "nombre": "Energía renovable",
+              "impacto": {
+                "CO2": -2.5,
+                "agua": -10.0,
+                "residuos": -0.3
+              }
+            },
+            {
+              "id": 4,
+              "nombre": "Diseño modular reparable",
+              "impacto": {
+                "CO2": -1.5,
+                "agua": -20.0,
+                "residuos": -1.2
+              }
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "nombre": "Uso y Consumo Energético",
+          "impacto": {
+            "CO2": 18.5,
+            "agua": 85.0,
+            "residuos": 1.2
+          },
+          "descripcion": "Consumo eléctrico durante la vida útil del dispositivo",
+          "decisiones": [
+            {
+              "id": 1,
+              "nombre": "Usar materiales reciclados",
+              "impacto": {
+                "CO2": -0.8,
+                "agua": -15.0,
+                "residuos": -0.5
+              }
+            },
+            {
+              "id": 2,
+              "nombre": "Optimizar procesos productivos",
+              "impacto": {
+                "CO2": -1.2,
+                "agua": -25.0,
+                "residuos": -0.8
+              }
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "nombre": "Fin de Vida y Reciclaje",
+          "impacto": {
+            "CO2": 3.2,
+            "agua": 25.0,
+            "residuos": 2.5
+          },
+          "descripcion": "Gestión de residuos electrónicos y recuperación de materiales",
+          "decisiones": [
+            {
+              "id": 1,
+              "nombre": "Usar materiales reciclados",
+              "impacto": {
+                "CO2": -0.8,
+                "agua": -15.0,
+                "residuos": -0.5
+              }
+            },
+            {
+              "id": 2,
+              "nombre": "Optimizar procesos productivos",
+              "impacto": {
+                "CO2": -1.2,
+                "agua": -25.0,
+                "residuos": -0.8
+              }
+            },
+            {
+              "id": 3,
+              "nombre": "Energía renovable",
+              "impacto": {
+                "CO2": -2.5,
+                "agua": -10.0,
+                "residuos": -0.3
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

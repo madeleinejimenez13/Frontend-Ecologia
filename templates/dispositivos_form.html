@@ -1,0 +1,44 @@
+<!-- templates/dispositivos_form.html -->
+{% extends "base.html" %}
+{% block title %}{{ accion }} Dispositivo - SimuVidaTech{% endblock %}
+{% block content %}
+  <div class="card">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">{{ accion }} Dispositivo</h2>
+
+    <form method="post" class="space-y-6">
+      <!-- Nombre -->
+      <div>
+        <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre del dispositivo</label>
+        {{ form.nombre(class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500") }}
+        {% if form.nombre.errors %}
+          <p class="mt-1 text-sm text-red-600">{{ form.nombre.errors[0] }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Tipo -->
+      <div>
+        <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo</label>
+        {{ form.tipo(class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500") }}
+        {% if form.tipo.errors %}
+          <p class="mt-1 text-sm text-red-600">{{ form.tipo.errors[0] }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Descripción (opcional) -->
+      <div>
+        <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción (opcional)</label>
+        {{ form.descripcion(class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500", rows=3, placeholder="Ej: Smartphone de gama media") }}
+      </div>
+
+      <!-- Acciones -->
+      <div class="flex space-x-3 pt-4">
+        <button type="submit" class="btn-success">
+          {{ accion }} y generar etapas
+        </button>
+        <a href="{{ url_for('dispositivos.list_dispositivos') }}" class="btn-secondary">
+          Cancelar
+        </a>
+      </div>
+    </form>
+  </div>
+{% endblock %}
